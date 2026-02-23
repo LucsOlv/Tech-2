@@ -5,6 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "geopy>=2.4.1",
+    "nominatim>=0.1",
+    "polyline>=2.0.4",
+    "requests>=2.32.5",
     "streamlit>=1.54.0",
     "streamlit-folium>=0.26.1",
 ]
