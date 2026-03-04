@@ -13,5 +13,5 @@ __all__ = [
     "order_crossover",
     "mutate",
     "default_problems",
-    "run_genetic_algorithm"
+    "run_genetic_algorithm",
 ]

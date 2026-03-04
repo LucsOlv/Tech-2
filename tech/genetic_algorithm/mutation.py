@@ -4,7 +4,9 @@ from typing import List, Tuple
 
 def mutate(solution: List[Tuple[float, float]], mutation_probability: float) -> List[Tuple[float, float]]:
     """
-    Muta uma solução invertendo um segmento da sequência com uma dada probabilidade de mutação.
+    Muta uma solução usando o operador 2-opt: inverte um segmento aleatório da rota.
+    É o operador de mutação padrão para TSP — gera muito mais diversidade do que
+    a simples troca de vizinhos adjacentes e converge mais rápido para boas soluções.
 
     Parâmetros:
     - solution (List[Tuple[float, float]]): A sequência da solução a ser mutada.
@@ -13,19 +15,21 @@ def mutate(solution: List[Tuple[float, float]], mutation_probability: float) -> 
     Retornos:
     List[Tuple[float, float]]: A sequência da solução mutada.
     """
+    # Verifica se a mutação deve ocorrer
+    if random.random() >= mutation_probability:
+        return solution
+
+    # Garante que haja pelo menos origem + 3 destinos para inverter um segmento não trivial
+    if len(solution) < 4:
+        return solution
+
     mutated_solution = copy.deepcopy(solution)
 
-    # Verifica se a mutação deve ocorrer    
-    if random.random() < mutation_probability:
-        
-        # Garante que haja pelo menos três cidades (Origem + 2 destinos) para realizar a troca
-        if len(solution) < 3:
-            return solution
-    
-        # Seleciona um índice aleatório (excluindo o índice 0 que é a origem, e o último) para a troca
-        index = random.randint(1, len(solution) - 2)
-        
-        # Troca a cidade no índice selecionado com o próximo índice
-        mutated_solution[index], mutated_solution[index + 1] = solution[index + 1], solution[index]   
-        
+    # Seleciona dois índices distintos dentro dos destinos (excluindo índice 0 = origem)
+    i = random.randint(1, len(solution) - 2)
+    j = random.randint(i + 1, len(solution) - 1)
+
+    # 2-opt: inverte o segmento entre i e j (inclusive)
+    mutated_solution[i:j + 1] = reversed(mutated_solution[i:j + 1])
+
     return mutated_solution

@@ -30,14 +30,14 @@ def calculate_distance(point1: Tuple[float, float], point2: Tuple[float, float])
 
 def calculate_fitness(path: List[Tuple[float, float]]) -> float:
     """
-    Calcula a aptidão de um caminho dado com base na distância Euclidiana total.
+    Calcula a aptidão de um caminho dado com base na distância Haversine total.
 
     Parâmetros:
     - path (List[Tuple[float, float]]): Uma lista de tuplas representando o caminho,
-      onde cada tupla contém as coordenadas de um ponto.
+      onde cada tupla contém as coordenadas (latitude, longitude) de um ponto.
 
     Retornos:
-    float: A distância Euclidiana total do caminho.
+    float: A distância Haversine total do caminho em quilômetros.
     """
     distance = 0
     n = len(path)

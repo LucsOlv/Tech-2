@@ -38,8 +38,8 @@ def calculate_route_metrics(G, veiculos_rotas):
                     total_meters += edge_data.get("length", 0)
                     total_seconds += edge_data.get("travel_time", 0)
             except Exception as e:
-                # Silencia falhas caso não ache rota viável entre 2 nós (e cai no fallback UI default de linha reta)
-                pass
+                # Loga falhas; a aresta com problema simplesmente não contribui para os totais
+                print(f"[metrics] Falha ao calcular métrica {p1} → {p2}: {e}")
 
     total_distance_km = total_meters / 1000.0
     total_time_minutes = total_seconds / 60.0

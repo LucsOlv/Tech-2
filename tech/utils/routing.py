@@ -56,6 +56,6 @@ def get_osmnx_route(G, start_coords, end_coords):
             
         return route_coords
     except Exception as e:
-        pass
+        print(f"[routing] Falha ao calcular rota {start_coords} → {end_coords}: {e}")
         
     return []
