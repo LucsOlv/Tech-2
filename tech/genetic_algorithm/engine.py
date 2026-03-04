@@ -11,7 +11,8 @@ def run_genetic_algorithm(
     cities_locations: List[Tuple[float, float]],
     population_size: int = 100,
     n_generations: int = 100,
-    mutation_probability: float = 0.3
+    mutation_probability: float = 0.3,
+    callback=None
 ) -> List[List[Tuple[float, float]]]:
     """
     Executa o Algoritmo Genético para resolver o PCV (Problema do Caixeiro Viajante).
@@ -31,12 +32,16 @@ def run_genetic_algorithm(
     # Listas para armazenar as melhores soluções para plotagem/análise
     best_solutions = []
     
-    for _ in range(n_generations):
+    for generation in range(n_generations):
         population_fitness = [calculate_fitness(individual) for individual in population]    
-        population, _ = sort_population(population, population_fitness)
+        population, sorted_fitness = sort_population(population, population_fitness)
         
         best_solution = population[0]
+        best_fitness = sorted_fitness[0]
         best_solutions.append(best_solution)    
+        
+        if callback:
+            callback(generation, best_fitness, best_solution)
 
         new_population = [population[0]]  # Mantém o melhor indivíduo: ELITISMO
         

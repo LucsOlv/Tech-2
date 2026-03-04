@@ -18,14 +18,14 @@ def mutate(solution: List[Tuple[float, float]], mutation_probability: float) -> 
     # Verifica se a mutação deve ocorrer    
     if random.random() < mutation_probability:
         
-        # Garante que haja pelo menos duas cidades para realizar a troca
-        if len(solution) < 2:
+        # Garante que haja pelo menos três cidades (Origem + 2 destinos) para realizar a troca
+        if len(solution) < 3:
             return solution
     
-        # Seleciona um índice aleatório (excluindo o último índice) para a troca
-        index = random.randint(0, len(solution) - 2)
+        # Seleciona um índice aleatório (excluindo o índice 0 que é a origem, e o último) para a troca
+        index = random.randint(1, len(solution) - 2)
         
-        # Troca as cidades no índice selecionado e no próximo índice
+        # Troca a cidade no índice selecionado com o próximo índice
         mutated_solution[index], mutated_solution[index + 1] = solution[index + 1], solution[index]   
         
     return mutated_solution

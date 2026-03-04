@@ -13,7 +13,22 @@ def generate_random_population(cities_location: List[Tuple[float, float]], popul
     Retornos:
     List[List[Tuple[float, float]]]: Uma lista de rotas, onde cada rota é representada como uma lista de localizações de cidades.
     """
-    return [random.sample(cities_location, len(cities_location)) for _ in range(population_size)]
+    if not cities_location:
+        return []
+    
+    # O primeiro elemento é considerado a origem fixa (Centro de Distribuição)
+    origin = cities_location[0]
+    destinations = cities_location[1:]
+    
+    population = []
+    for _ in range(population_size):
+        # Embaralha apenas os destinos
+        shuffled_destinations = random.sample(destinations, len(destinations))
+        # Recria a rota colocando a origem no início
+        route = [origin] + shuffled_destinations
+        population.append(route)
+        
+    return population
 
 
 def sort_population(population: List[List[Tuple[float, float]]], fitness: List[float]) -> Tuple[List[List[Tuple[float, float]]], List[float]]:
