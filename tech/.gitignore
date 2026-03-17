@@ -8,3 +8,21 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Cache
+cache/
+
+# Test cache
+.pytest_cache/
+
+# Replication logs
+.replication/
+
+# OSRM data
+osrm-data/
+
+# Streamlit
+.streamlit/
+
+# Environment variables
+.env

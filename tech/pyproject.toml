@@ -12,6 +12,7 @@ dependencies = [
     "osmnx>=2.1.0",
     "polyline>=2.0.4",
     "pypdf>=6.7.3",
+    "python-dotenv>=1.2.2",
     "requests>=2.32.5",
     "scikit-learn>=1.8.0",
     "streamlit>=1.54.0",
